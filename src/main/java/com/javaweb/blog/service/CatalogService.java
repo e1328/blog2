@@ -19,4 +19,8 @@ public class CatalogService {
         return catalogDao.findAll();
     }
 
+    public void add(Catalog catalog) {
+        catalogDao.save(catalog);
+    }
+
 }

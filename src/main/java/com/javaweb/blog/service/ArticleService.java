@@ -9,16 +9,12 @@ import com.javaweb.blog.pojo.ArticleLabel;
 import com.javaweb.blog.pojo.Catalog;
 import com.javaweb.blog.pojo.Label;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -102,8 +98,47 @@ public class ArticleService {
         return map;
     }
 
-    public void add(Article article) {
-        articleDao.save(article);
+    public void add(Article article, String[] labelArr) {
+        System.out.println(article);
+        List<String> list = Arrays.asList(labelArr);
+        System.out.println(list);
+        int articleId = articleDao.save(article).getArticleId();
+        for(int i = 0; i < list.size(); i++) {
+            ArticleLabel articleLabel = new ArticleLabel();
+            Label label = new Label();
+            label.setLabelName(list.get(i));
+            int labelId = labelDao.save(label).getLabelId();
+            articleLabel.setArticleId(articleId);
+            articleLabel.setLabelId(labelId);
+            articleLabelDao.save(articleLabel);
+        }
+    }
+
+    public void modifyById(Article article, String[] labelArr) {
+        //删除之前的标签
+        List<ArticleLabel> articleLabelList = articleLabelDao.findAllByArticleId(article.getArticleId());
+        for(int i = 0; i < articleLabelList.size(); i++) {
+            int id = articleLabelList.get(i).getId();
+            articleLabelDao.deleteById(id);
+        }
+
+        System.out.println(article);
+        List<String> list = Arrays.asList(labelArr);
+        System.out.println(list);
+        int articleId = articleDao.save(article).getArticleId();
+        for(int i = 0; i < list.size(); i++) {
+            ArticleLabel articleLabel = new ArticleLabel();
+            Label label = new Label();
+            label.setLabelName(list.get(i));
+            int labelId = labelDao.save(label).getLabelId();
+            articleLabel.setArticleId(articleId);
+            articleLabel.setLabelId(labelId);
+            articleLabelDao.save(articleLabel);
+        }
+    }
+
+    public void deleteById(int id) {
+        articleDao.deleteById(id);
     }
 
 }

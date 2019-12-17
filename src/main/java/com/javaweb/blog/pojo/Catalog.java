@@ -15,6 +15,9 @@ public class Catalog implements Serializable {
     @Column(name = "catalog_name")
     private String catalogName;
 
+    @Column(name = "is_top")
+    private int isTop;
+
     public int getCatalogId() {
         return catalogId;
     }
@@ -31,11 +34,20 @@ public class Catalog implements Serializable {
         this.catalogName = catalogName;
     }
 
+    public int getIsTop() {
+        return isTop;
+    }
+
+    public void setIsTop(int isTop) {
+        this.isTop = isTop;
+    }
+
     @Override
     public String toString() {
         return "Catalog{" +
                 "catalogId=" + catalogId +
-                ", catalogName=" + catalogName +
+                ", catalogName='" + catalogName + '\'' +
+                ", isTop=" + isTop +
                 '}';
     }
 

@@ -37,9 +37,21 @@ public class ArticleController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Result add(@RequestBody Article article) {
-        articleService.add(article);
+    public Result add(@RequestBody Article article, String[] labelArr) {
+        articleService.add(article, labelArr);
         return new Result(true, StatusCode.OK, "增加成功");
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public Result modifyById(@RequestBody Article article, String[] labelArr) {
+        articleService.modifyById(article, labelArr);
+        return new Result(true, StatusCode.OK, "修改成功");
+    }
+
+    @RequestMapping(value = "/{id1}", method = RequestMethod.DELETE)
+    public Result deleteById(@PathVariable int id) {
+        articleService.deleteById(id);
+        return new Result(true, StatusCode.OK, "删除成功");
     }
 
 }
