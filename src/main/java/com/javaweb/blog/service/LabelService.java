@@ -25,8 +25,17 @@ public class LabelService {
         return labelDao.findById(id).get();
     }
 
+    public void add(Label label) {
+        labelDao.save(label);
+    }
+
     public void deleteById(int id) {
         labelDao.deleteById(id);
+    }
+
+    public void modifyById(int id, Label label) {
+        label.setLabelId(id);
+        labelDao.save(label);
     }
 
     public Page<Label> findSearch(int page, int size) {
