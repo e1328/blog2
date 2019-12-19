@@ -118,8 +118,8 @@ public class ArticleService {
         //删除之前的标签
         List<ArticleLabel> articleLabelList = articleLabelDao.findAllByArticleId(article.getArticleId());
         for(int i = 0; i < articleLabelList.size(); i++) {
-            int id = articleLabelList.get(i).getId();
-            articleLabelDao.deleteById(id);
+            int id = articleLabelList.get(i).getLabelId();
+            labelDao.deleteById(id);
         }
 
         System.out.println(article);

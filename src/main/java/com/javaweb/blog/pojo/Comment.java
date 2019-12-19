@@ -25,6 +25,12 @@ public class Comment implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Transient
+    private User user;
+
+    @Transient
+    private Article article;
+
     public int getCommentId() {
         return commentId;
     }
@@ -65,6 +71,22 @@ public class Comment implements Serializable {
         this.createTime = createTime;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +
@@ -73,6 +95,8 @@ public class Comment implements Serializable {
                 ", articleId=" + articleId +
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
+                ", user=" + user +
+                ", article=" + article +
                 '}';
     }
 

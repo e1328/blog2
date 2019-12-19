@@ -19,4 +19,18 @@ public class UserService {
         return userDao.findAll();
     }
 
+    public void add(User user) {
+        userDao.save(user);
+    }
+
+    public User login(User user) {
+        User u = null;
+        u = userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+        return u;
+    }
+
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
 }

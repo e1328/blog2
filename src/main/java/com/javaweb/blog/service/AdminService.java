@@ -19,4 +19,10 @@ public class AdminService {
         return adminDao.findAll();
     }
 
+    public Admin login(Admin admin) {
+        Admin a = null;
+        a = adminDao.findByUsernameAndPassword(admin.getUsername(), admin.getPassword());
+        return a;
+    }
+
 }

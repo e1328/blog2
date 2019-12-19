@@ -48,7 +48,7 @@ public class ArticleController {
         return new Result(true, StatusCode.OK, "修改成功");
     }
 
-    @RequestMapping(value = "/{id1}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Result deleteById(@PathVariable int id) {
         articleService.deleteById(id);
         return new Result(true, StatusCode.OK, "删除成功");
